@@ -1,0 +1,4 @@
+changes:
+  - server.properties: False
+  - plugin_customization.ini: True
+  - plugins: True
