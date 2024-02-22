@@ -7,6 +7,7 @@ stages:
       - config/config.yaml
     outs:
       - artifacts/raw_local_dir/data.csv 
+
   save_split_stage:
     cmd: python src/stage_02_split_data.py
     deps:
@@ -20,6 +21,7 @@ stages:
     outs:
       - artifacts/split_data_dir/train.csv
       - artifacts/split_data_dir/test.csv
+
   train_data_stage:
     cmd: python src/stage_03_train_data.py
     deps:
@@ -33,3 +35,14 @@ stages:
       - model_params.ElasticNet.l1_ratio
     outs:
       - artifacts/model_dir/ElasticNet.pkl
+    
+  evaluate_stage:
+    cmd: python src/stage_04_evaluate.py
+    deps:
+      - src/stage_04_evaluate.py
+      - config/config.yaml
+      - artifacts/model_dir/ElasticNet.pkl
+      - src/utils/main_utils.py
+      - artifacts/split_data_dir/test.csv
+    outs:
+      - artifacts/scores_dir/scores.json
