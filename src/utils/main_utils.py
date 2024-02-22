@@ -15,3 +15,9 @@ def create_directory(dirs:list):
             print("The directory has got created at {0}".format(directories))
         except Exception as e:
             print(e)
+
+def save_data_df(data,data_path):
+    try:
+        data.to_csv(data_path)
+    except Exception as e:
+        print(e)

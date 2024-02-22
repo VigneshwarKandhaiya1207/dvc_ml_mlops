@@ -12,9 +12,9 @@ def get_data(config_path:str):
     remote_data_path=config['data_source']
     df = pd.read_csv(remote_data_path,sep=';')
 
-    artifacts_dir = config["artifcats"]["artifacts_dir"]
-    raw_local_dir = config["artifcats"]["raw_local_dir"]
-    raw_local_file = config["artifcats"]["raw_local_file"]
+    artifacts_dir = config["artifacts"]["artifacts_dir"]
+    raw_local_dir = config["artifacts"]["raw_local_dir"]
+    raw_local_file = config["artifacts"]["raw_local_file"]
 
     raw_local_dir_path= os.path.join(artifacts_dir,raw_local_dir)
     raw_local_file_path=os.path.join(raw_local_dir_path,raw_local_file)
@@ -28,6 +28,7 @@ def get_data(config_path:str):
     df.to_csv(raw_local_file_path,sep=',',index=False)
 
 if __name__== "__main__":
+    print("<<<<<< Running Stage 01 >>>>>>")
     args=argparse.ArgumentParser()
     args.add_argument("--config","-c",default="config/config.yaml")
     parsed_args=args.parse_args()

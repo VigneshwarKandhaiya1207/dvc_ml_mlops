@@ -1,4 +1,3 @@
-changes:
-  - server.properties: False
-  - plugin_customization.ini: True
-  - plugins: True
+base:
+  split_ratio: 0.3
+  random_state: 42

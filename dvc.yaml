@@ -1,9 +1,22 @@
 stages:
   load_stage:
-    cmd: python src/stage_01_load_save.py
+    cmd: python src/stage_01_load_save.py --config=config/config.yaml
     deps:
       - src/stage_01_load_save.py
       - src/utils/main_utils.py
       - config/config.yaml
     outs:
       - artifacts/raw_local_dir/data.csv 
+  save_split_stage:
+    cmd: python src/stage_02_split_data.py
+    deps:
+      - src/stage_02_split_data.py
+      - src/utils/main_utils.py
+      - artifacts/raw_local_dir/data.csv
+      - config/config.yaml
+    params:
+      - base.split_ratio
+      - base.random_state
+    outs:
+      - artifacts/split_data_dir/train.csv
+      - artifacts/split_data_dir/test.csv
